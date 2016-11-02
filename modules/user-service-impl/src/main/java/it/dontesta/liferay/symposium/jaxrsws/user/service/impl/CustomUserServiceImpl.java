@@ -35,7 +35,7 @@ public class CustomUserServiceImpl implements CustomUserService {
 	public List<User> getUsersByTag(String tagName) throws CustomUserServiceException {
 		
 		List<User> userList = searchUsersByTagName(tagName);
-		if (Validator.isNotNull(userList)) {
+		if (Validator.isNotNull(userList) && !userList.isEmpty()) {
 			return userList;
 		} else {
 			throw new CustomUserServiceException("Users not found by"
@@ -70,8 +70,6 @@ public class CustomUserServiceImpl implements CustomUserService {
 		SearchContext searchContext = new SearchContext();
 		searchContext.setCompanyId(PortalUtil.getDefaultCompanyId());
 		searchContext.setEntryClassNames(new String[] { User.class.getName() });
-		searchContext.setStart(-1);
-		searchContext.setEnd(-1);
 		searchContext.setAndSearch(true);
 		
 		usersQuery.addRequiredTerm(Field.COMPANY_ID, PortalUtil.getDefaultCompanyId());

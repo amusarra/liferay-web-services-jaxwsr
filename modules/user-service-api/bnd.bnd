@@ -5,4 +5,5 @@ Bundle-Category: User Service
 Bundle-Description: API for Custom User Service
 Export-Package: \
 	it.dontesta.liferay.symposium.jaxrsws.user.exception,\
-	it.dontesta.liferay.symposium.jaxrsws.user.api
+	it.dontesta.liferay.symposium.jaxrsws.user.api,\
+	it.dontesta.liferay.symposium.jaxrsws.user.model

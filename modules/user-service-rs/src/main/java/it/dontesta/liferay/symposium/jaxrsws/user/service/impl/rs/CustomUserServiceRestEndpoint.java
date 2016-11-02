@@ -1,7 +1,6 @@
 package it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
@@ -15,14 +14,11 @@ import javax.ws.rs.core.MediaType;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.User;
-
-import it.dontesta.liferay.symposium.jaxrsws.user.api.CustomUserService;
+import it.dontesta.liferay.symposium.jaxrsws.user.api.PersonService;
 import it.dontesta.liferay.symposium.jaxrsws.user.exception.CustomUserServiceException;
+import it.dontesta.liferay.symposium.jaxrsws.user.model.PersonList;
 
-@ApplicationPath("/ext.users")
+@ApplicationPath("/ext.persons")
 @Component(
 	immediate = true, 
 	property = {
@@ -30,7 +26,7 @@ import it.dontesta.liferay.symposium.jaxrsws.user.exception.CustomUserServiceExc
 	},
 	service = Application.class
 )
-public class CustomUserServiceRestEndpoint extends Application {
+public class CustomUserServiceRestEndpoint extends Application implements PersonService {
 
 	@Override
 	public Set<Object> getSingletons() {
@@ -38,49 +34,31 @@ public class CustomUserServiceRestEndpoint extends Application {
 	}
 
 	@GET
-	@Path("/list/{tagName}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUsersByTag(@PathParam("tagName")String tagName) throws CustomUserServiceException {
-		if (_log.isInfoEnabled()) {
-			_log.info("getUsersByTag {"
-					+ tagName
-					+ "}...");
-		}
-		return _customUserService.getUsersByTag(tagName);
+	@Path("/list/tag/{tagName}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public PersonList getUsersByTag(@PathParam("tagName")String tagName) throws CustomUserServiceException {
+		return _personService.getUsersByTag(tagName);
 	}
 
 	@GET
-	@Path("/list/{tagNames}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUsersByTag(@PathParam("tagNames")String[] tagNames) throws CustomUserServiceException {
-		if (_log.isInfoEnabled()) {
-			_log.info("getUsersByTag {"
-					+ tagNames
-					+ "}...");
-		}
-		return _customUserService.getUsersByTag(tagNames);
+	@Path("/list/tags/{tagNames}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public PersonList getUsersByTag(@PathParam("tagNames")String[] tagNames) throws CustomUserServiceException {
+		return _personService.getUsersByTag(tagNames);
 	}
 
 	@GET
-	@Path("/list/{category}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUsersByCategory(@PathParam("category")String category) throws CustomUserServiceException {
-		if (_log.isInfoEnabled()) {
-			_log.info("getUsersByCategory {"
-					+ category
-					+ "}...");
-		}
-		return _customUserService.getUsersByCategory(category);
+	@Path("/list/category/{category}")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public PersonList getUsersByCategory(@PathParam("category")String category) throws CustomUserServiceException {
+		return _personService.getUsersByCategory(category);
 	}
 
 	
 	@Reference
-	public void setCustomUserService(CustomUserService customUserService) {
-		_customUserService = customUserService;
+	public void setPersonService(PersonService personService) {
+		_personService = personService;
 	}
 
-	private CustomUserService _customUserService;
-
-	private static Log _log = LogFactoryUtil.getLog(CustomUserServiceRestEndpoint.class);
-
+	private PersonService _personService;
 }

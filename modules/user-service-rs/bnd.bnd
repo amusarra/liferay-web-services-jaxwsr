@@ -1,4 +1,4 @@
-Bundle-Name: User Service REST API End Point
+Bundle-Name: Custom User Service REST API End Point
 Bundle-SymbolicName: it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs
 Bundle-Version: 1.0.0
 Bundle-Category: User Service
