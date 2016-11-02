@@ -1,0 +1,5 @@
+Bundle-Name: User Service WS API End Point
+Bundle-SymbolicName: it.dontesta.liferay.symposium.jaxrsws.user.service.impl.ws
+Bundle-Version: 1.0.0
+Bundle-Category: User Service
+Bundle-Description: WS API End Point for User Service

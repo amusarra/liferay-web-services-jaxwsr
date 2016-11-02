@@ -1,0 +1,5 @@
+Bundle-Name: Custom User Service Impl
+Bundle-SymbolicName: it.dontesta.liferay.symposium.jaxrsws.user.service.impl
+Bundle-Version: 1.0.0
+Bundle-Category: User Service
+Bundle-Description: Implementation for Custom User Service

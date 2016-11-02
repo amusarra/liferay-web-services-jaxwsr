@@ -1,0 +1,8 @@
+Bundle-Name: Custom User Service API
+Bundle-SymbolicName: it.dontesta.liferay.symposium.jaxrsws.user.api
+Bundle-Version: 1.0.0
+Bundle-Category: User Service
+Bundle-Description: API for Custom User Service
+Export-Package: \
+	it.dontesta.liferay.symposium.jaxrsws.user.exception,\
+	it.dontesta.liferay.symposium.jaxrsws.user.api
