@@ -36,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
 			person.setFirstName(user.getFirstName());
 			person.setLastName(user.getLastName());
 			
-			personList.getUserList().add(person);
+			personList.getPersonList().add(person);
 		}
 		
 		return personList;

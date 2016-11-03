@@ -17,22 +17,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PersonList {
 
 	@XmlElement
-    private List<Person> personList;
+    private List<Person> persons;
 
 	/**
-	 * @return the personList
+	 * @return the persons
 	 */
-	public List<Person> getUserList() {
-		if (personList == null) {
-			personList = new ArrayList<Person>();
+	public List<Person> getPersonList() {
+		if (persons == null) {
+			persons = new ArrayList<Person>();
 		}
-		return this.personList;
+		return this.persons;
 	}
 
 	/**
-	 * @param personList the personList to set
+	 * @param persons the persons to set
 	 */
-	public void setPersonList(List<Person> personList) {
-		this.personList = personList;
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
 	}
 }
