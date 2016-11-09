@@ -66,7 +66,7 @@ Dal _Control Panel => Configuration => System Settings_ occorre configurare
 A seguire le configurazioni da applicare per questo progetto.
 
 ![Configurazione Apache CXF EndPoints](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_1.png)
-**Figura 1** - Configurazione Apache CXF EndPoints**
+**Figura 1** - Configurazione Apache CXF EndPoints
 
 ![Configurazione Apache CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_2.png)
 **Figura 2** - Configurazione End Point CXF per i servizi REST
