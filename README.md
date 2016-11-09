@@ -66,18 +66,24 @@ Dal _Control Panel => Configuration => System Settings_ occorre configurare
 A seguire le configurazioni da applicare per questo progetto.
 
 ![Configurazione Apache CXF EndPoints](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_1.png)
+
 **Figura 1** - Configurazione Apache CXF EndPoints
 
 ![Configurazione Apache CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_2.png)
+
 **Figura 2** - Configurazione End Point CXF per i servizi REST
 
 ![Configurazione Apache CXF EndPoint SOAP](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_3.png)
+
 **Figura 3** - Configurazione End Point CXF per i servizi SOAP
 
+
 ![Configurazione REST Extenders](http://www.dontesta.it/blog/wp-content/uploads/2014/02/RESTExtenders.png)
+
 **Figura 4** - Configurazione REST Extender
 
 ![Configurazione Apache CXF EndPoint](http://www.dontesta.it/blog/wp-content/uploads/2014/02/SOAPExtenders.png)
+
 **Figura 5** - Configurazione SOAP Extender
 
 
