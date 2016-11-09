@@ -58,5 +58,90 @@ $ lb | grep Custom
 **Console 5** - Lista dei bundle appena installati e attivi
 
 ### 2. Configurazione Liferay SOAP e REST Extender
+Dal _Control Panel => Configuration => System Settings_ occorre configurare
+* Apache CXF EndPoints
+* SOAP Extender
+* REST Extender
+
+A seguire le configurazioni da applicare per questo progetto.
+
+![Configurazione Apache CXF EndPoints](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_1.png)
+**Figura 1** - Configurazione Apache CXF EndPoints**
+
+![Configurazione Apache CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_2.png)
+**Figura 2** - Configurazione End Point CXF per i servizi REST
+
+![Configurazione Apache CXF EndPoint SOAP](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_3.png)
+**Figura 3** - Configurazione End Point CXF per i servizi SOAP
+
+![Configurazione REST Extenders](http://www.dontesta.it/blog/wp-content/uploads/2014/02/RESTExtenders.png)
+**Figura 4** - Configurazione REST Extender
+
+![Configurazione Apache CXF EndPoint](http://www.dontesta.it/blog/wp-content/uploads/2014/02/SOAPExtenders.png)
+**Figura 5** - Configurazione SOAP Extender
+
+
 
 ### 3. Test del servizi REST e SOAP
+Gli endpoint dei servizi web (sulla propria istanza Liferay) sono:
+
+* http://localhost:8080/o/rest/ext.persons
+* http://localhost:8080/o/web-services/CustomUserServiceWSEndPoint
+
+Per i test dei servizi SOAP e REST è possibile utilizzare sia SOAP UI sia cURL. A titolo esemplificativo a seguire un esempio di chiamata al servizio REST via cURL.
+
+```
+$ curl -v -H "Accept: application/xml" \
+ http://localhost:8080/o/rest/ext.persons/list/tag/it-architect | \
+ xmllint --format --recover -
+
+$ curl -v -H "Accept: application/json" \
+ http://localhost:8080/o/rest/ext.persons/list/tag/it-architect | \
+ python -m json.tool
+```
+**Console 6** - Test del servizio REST via cURL.
+
+A seguire l'output delle due chiamate al servizio.
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<personList>
+  <persons>
+    <email>antonio.musarra@gmail.com</email>
+    <firstName>Antonio</firstName>
+    <lastName>Musarra</lastName>
+    <userId>34469</userId>
+    <userName>amusarra</userName>
+  </persons>
+  <persons>
+    <email>vrossi@example.com</email>
+    <firstName>Vittorio</firstName>
+    <lastName>Rossi</lastName>
+    <userId>34479</userId>
+    <userName>vrossi</userName>
+  </persons>
+</personList>
+```
+**Console 7** - Output del servizio in formato xml
+
+```
+{
+    "persons": [
+        {
+            "email": "antonio.musarra@gmail.com",
+            "firstName": "Antonio",
+            "lastName": "Musarra",
+            "userId": 34469,
+            "userName": "amusarra"
+        },
+        {
+            "email": "vrossi@example.com",
+            "firstName": "Vittorio",
+            "lastName": "Rossi",
+            "userId": 34479,
+            "userName": "vrossi"
+        }
+    ]
+}
+```
+**Console 8** Output del servizio in formato JSON
