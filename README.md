@@ -1,5 +1,7 @@
 # Liferay JAX-WS e JAX-RS
 
+![](https://travis-ci.org/amusarra/liferay-web-services-jaxwsrs.svg?branch=master)
+
 Questo progetto è stato realizzato in occasione del [Liferay Symposium del 2016 (9-10 Novembre)](https://web.liferay.com/it/web/events2016/italy/home) e in particolare per la giornata di Bootcamp e il talk [Come sviluppare servizi SOAP e REST in standard JAX-WS e JAX-RS su Liferay](https://web.liferay.com/it/web/events2016/italy/agenda) tenuto da me, _di persona, personalmente (cit. Commissario Montalbano)_.
 
 Dopo il Bootcamp sarà mia cura inserire il link al PDF della presentazione dove troverete la descrizione del progetto.
