@@ -10,8 +10,16 @@ Dopo il Bootcamp sarà mia cura inserire il link al PDF della presentazione dove
 Il progetto è organizzato secondo la struttura del [Liferay Workspace](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/liferay-workspace). Requisiti minimi:
 
 * Oracle JDK 1.8
-* Liferay 7 CE GA2
+* Liferay 7 CE GA3
 * Git
+
+** Attenzione!!! ** E' richiesta la GA3 di Liferay 7 perchè sulla GA2 esiste un errore che accade in fase di registrazione del servizio SOAP. Questo problema è stato risolto sulla GA3. Per i più curiosi ecco l'eccezione in fase di registrazione del servizio SOAP sulla GA2.
+
+```
+07:33:24,782 INFO  [fileinstall-/opt/liferay-ce-portal-7.0-ga2-blog/osgi/modules][BundleStartStopLogger:35] STARTED it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs_1.0.0 [586]
+07:33:25,212 WARN  [fileinstall-/opt/liferay-ce-portal-7.0-ga2-blog/osgi/modules][com_liferay_portal_remote_soap_extender:103] Invocation of 'addService' failed.
+java.lang.NoSuchMethodError: org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean.isWrapperPartQualified(Lorg/apache/cxf/service/model/MessagePartInfo;)Z
+```
 
 Per il build e deploy procedere in questo modo:
 * clone del repository
@@ -57,6 +65,20 @@ $ lb | grep Custom
 ```
 **Console 5** - Lista dei bundle appena installati e attivi
 
+Se volessimo vedere nel dettaglio le implementazioni dell'interfaccia _it.dontesta.liferay.symposium.jaxrsws.user.api.PersonService_ possiamo interrogare il container OSGi tramite la gogo shell attraverso il comando **services** che restituisce dettagli sul servizio specificato come [OSGi filter](https://osgi.org/javadoc/r6/core/org/osgi/framework/Filter.html).
+
+```
+$ telnet localhost 11311
+$ services (objectClass=it.dontesta.liferay.symposium.jaxrsws.user.api.PersonService)
+
+{it.dontesta.liferay.symposium.jaxrsws.user.api.PersonService}={component.name=it.dontesta.liferay.symposium.jaxrsws.user.service.impl.PersonServiceImpl, component.id=2373, service.id=6524, service.bundleid=574, service.scope=bundle}
+  "Registered by bundle:" it.dontesta.liferay.symposium.jaxrsws.user.service.impl_1.0.0 [574]
+  "Bundles using service"
+    it.dontesta.liferay.symposium.jaxrsws.user.service.impl.ws_1.0.0 [575]
+    it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs_1.0.0 [572]
+```
+
+
 ### 2. Configurazione Liferay SOAP e REST Extender
 Dal _Control Panel => Configuration => System Settings_ occorre configurare
 * Apache CXF EndPoints
@@ -93,6 +115,8 @@ Gli endpoint dei servizi web (sulla propria istanza Liferay) sono:
 
 * http://localhost:8080/o/rest/ext.persons
 * http://localhost:8080/o/web-services/CustomUserServiceWSEndPoint
+
+Per il servizio SOAP il WSDL è disponibile alla URL [Custom User Service WSDL](http://localhost:8080/o/web-services/CustomUserServiceWSEndPoint?wsdl)
 
 Per i test dei servizi SOAP e REST è possibile utilizzare sia SOAP UI sia cURL. A titolo esemplificativo a seguire un esempio di chiamata al servizio REST via cURL.
 
