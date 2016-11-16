@@ -48,6 +48,7 @@ public class CustomUserServiceWSEndPoint implements PersonService {
 	}
 
 	@Reference
+	@WebMethod(exclude=true)
 	public void setPersonService(PersonService personService) {
 		_personService = personService;
 	}
