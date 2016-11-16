@@ -16,8 +16,8 @@ Il progetto è organizzato secondo la struttura del [Liferay Workspace](https://
 **Attenzione!!!** E' richiesta la GA3 di Liferay 7 perchè sulla GA2 esiste un errore che accade in fase di registrazione del servizio SOAP. Questo problema è stato risolto sulla GA3. Per i più curiosi ecco l'eccezione in fase di registrazione del servizio SOAP sulla GA2.
 
 ```
-07:33:24,782 INFO  [fileinstall-/opt/liferay-ce-portal-7.0-ga2-blog/osgi/modules][BundleStartStopLogger:35] STARTED it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs_1.0.0 [586]
-07:33:25,212 WARN  [fileinstall-/opt/liferay-ce-portal-7.0-ga2-blog/osgi/modules][com_liferay_portal_remote_soap_extender:103] Invocation of 'addService' failed.
+07:33:24,782 INFO  [fileinstall-/opt/liferay-ce-portal-7.0-ga3/osgi/modules][BundleStartStopLogger:35] STARTED it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs_1.0.0 [586]
+07:33:25,212 WARN  [fileinstall-/opt/liferay-ce-portal-7.0-ga3/osgi/modules][com_liferay_portal_remote_soap_extender:103] Invocation of 'addService' failed.
 java.lang.NoSuchMethodError: org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean.isWrapperPartQualified(Lorg/apache/cxf/service/model/MessagePartInfo;)Z
 ```
 
@@ -39,7 +39,7 @@ Per il deploy è possibile procedere in due modi:
 * configurazione del parametro **liferay.workspace.home.dir** sul file gradle.properties (in project.root) impostando il valore al path assoluto della propria installazione di Liferay
 
 ```
-liferay.workspace.home.dir=/opt/liferay-ce-portal-7.0-ga2-blog
+liferay.workspace.home.dir=/opt/liferay-ce-portal-7.0-ga3
 ```
 **Console 2** - Esempio di configurazione dell'istanza Liferay su cui installare i bundle
 
