@@ -114,6 +114,7 @@ Nel caso in cui volessimo aggiungere il servizio di autenticazione che utilizza 
 * auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/ext.persons/* -> Filtro sulle URL a cui applicare il filtro di sicurezza
 
 ![Configurazione Sicurezza HTTP Basic CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_4.png)
+
 **Figura 6** - Configurazione Sicurezza HTTP Basic CXF EndPoint REST
 
 Allo stesso modo si applica la configurazione all'endpoint SOAP.
