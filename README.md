@@ -4,7 +4,7 @@
 
 Questo progetto è stato realizzato in occasione del [Liferay Symposium del 2016 (9-10 Novembre)](https://web.liferay.com/it/web/events2016/italy/home) e in particolare per la giornata di Bootcamp e il talk [Come sviluppare servizi SOAP e REST in standard JAX-WS e JAX-RS su Liferay](https://web.liferay.com/it/web/events2016/italy/agenda) tenuto da me, _di persona, personalmente (cit. Commissario Montalbano)_.
 
-Dopo il Bootcamp sarà mia cura inserire il link al PDF della presentazione dove troverete la descrizione del progetto.
+Le slide della presentazione sono disponibili su SlideShare [Come sviluppare servizi SOAP e REST in standard JAX-WS e JAX-RS su Liferay](http://www.slideshare.net/amusarra/jaxws-e-jaxrs)
 
 ### 1. Build del progetto
 Il progetto è organizzato secondo la struttura del [Liferay Workspace](https://dev.liferay.com/develop/tutorials/-/knowledge_base/7-0/liferay-workspace). Requisiti minimi:
@@ -108,7 +108,15 @@ A seguire le configurazioni da applicare per questo progetto.
 
 **Figura 5** - Configurazione SOAP Extender
 
+Nel caso in cui volessimo aggiungere il servizio di autenticazione che utilizza il meccanismo di [HTTP Basic Access Authentication](https://it.wikipedia.org/wiki/Basic_access_authentication) occorrerà aggiungere alla configurazione degli endpoint SOAP e REST le seguenti properties del filter [**AuthVerifier**](https://dev.liferay.com/discover/deployment/-/knowledge_base/7-0/authentication-verifiers).
 
+* auth.verifier.BasicAuthHeaderAuthVerifier.basic_auth=true -> Abilitazione dell'HTTP Basic Authentication
+* auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/ext.persons/* -> Filtro sulle URL a cui applicare il filtro di sicurezza
+
+![Configurazione Sicurezza HTTP Basic CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_4.png)
+**Figura 6** - Configurazione Sicurezza HTTP Basic CXF EndPoint REST
+
+Allo stesso modo si applica la configurazione all'endpoint SOAP.
 
 ### 3. Test del servizi REST e SOAP
 Gli endpoint dei servizi web (sulla propria istanza Liferay) sono:
@@ -174,13 +182,59 @@ A seguire l'output delle due chiamate al servizio.
     ]
 }
 ```
-**Console 8** Output del servizio in formato JSON
+**Console 8** - Output del servizio in formato JSON
+
+Nel caso in cui fosse abilitata l'autenticazione, in output otterremmo un errore di accesso negato al servizio, così come indicato a seguire.
+
+```
+< HTTP/1.1 401 Unauthorized
+< Server: Apache-Coyote/1.1
+< X-Content-Type-Options: nosniff
+< X-Frame-Options: SAMEORIGIN
+< X-XSS-Protection: 1
+< Set-Cookie: JSESSIONID=4ED37B0938DAB3BF3144B671C846B105; Path=/; HttpOnly
+< X-Request-URL: http://localhost:8080/o/rest/ext.persons/list/tag/it-architect
+< WWW-Authenticate: Basic realm="PortalRealm"
+```
+**Console 9** Errore di accesso non autorizzato HTTP 401
+
+In questo caso occorre costruire la chiamata cURL passando i dati di autenticazione, username e passaword, così come indicato a seguire. Per instaurare una connessione HTTP Basic Authentication via cURL passare la coppia username e password tramite lo switch -u.
+
+```
+$ curl -v -H "Accept: application/xml" -u test@liferay.com:test1 \
+ http://localhost:8080/o/rest/ext.persons/list/tag/it-architect | \
+ xmllint --format --recover -
+```
+**Console 10** - Test del servizio REST via cURL tramite autenticazione
+
+```
+* Connected to localhost (127.0.0.1) port 8080 (#0)
+* Server auth using Basic with user 'test@liferay.com'
+> GET /o/rest/ext.persons/list/tag/it-architect HTTP/1.1
+> Host: localhost:8080
+> Authorization: Basic dGVzdEBsaWZlcmF5LmNvbTp0ZXN0MQ==
+> User-Agent: curl/7.49.1
+> Accept: application/xml
+
+
+< Server: Apache-Coyote/1.1
+< X-Content-Type-Options: nosniff
+< X-Frame-Options: SAMEORIGIN
+< X-XSS-Protection: 1
+< Set-Cookie: JSESSIONID=FDC269CA68C0358762B1C3760E94C3DD; Path=/; HttpOnly
+< X-Request-URL: http://localhost:8080/o/rest/ext.persons/list/tag/it-architect
+< Date: Wed, 16 Nov 2016 15:26:36 GMT
+< Content-Type: application/xml
+< Content-Length: 248
+
+```
+**Console 11** - Evidenza della connessione al servizio via HTTP Basic Authentication
 
 A seguire un esempio di chiamata al servizio SOAP e in particolare del metodo _getUsersByTag()_ tramite SOAP UI.
 
 ![Esempio di chiamata al servizio SOAP per il metodo getUsersByTag](http://www.dontesta.it/blog/wp-content/uploads/2014/02/TEST_SERVIZIO_SOAP_CustomUserServiceWS_1.png)
 
-**Figura 6** - Esempio di chiamata al servizio SOAP per il metodo getUsersByTag
+**Figura 7** - Esempio di chiamata al servizio SOAP per il metodo getUsersByTag
 
 ```
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.impl.service.user.jaxrsws.symposium.liferay.dontesta.it/">
