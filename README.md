@@ -13,7 +13,7 @@ Il progetto è organizzato secondo la struttura del [Liferay Workspace](https://
 * Liferay 7 CE GA3
 * Git
 
-** Attenzione!!! ** E' richiesta la GA3 di Liferay 7 perchè sulla GA2 esiste un errore che accade in fase di registrazione del servizio SOAP. Questo problema è stato risolto sulla GA3. Per i più curiosi ecco l'eccezione in fase di registrazione del servizio SOAP sulla GA2.
+**Attenzione!!!** E' richiesta la GA3 di Liferay 7 perchè sulla GA2 esiste un errore che accade in fase di registrazione del servizio SOAP. Questo problema è stato risolto sulla GA3. Per i più curiosi ecco l'eccezione in fase di registrazione del servizio SOAP sulla GA2.
 
 ```
 07:33:24,782 INFO  [fileinstall-/opt/liferay-ce-portal-7.0-ga2-blog/osgi/modules][BundleStartStopLogger:35] STARTED it.dontesta.liferay.symposium.jaxrsws.user.service.impl.rs_1.0.0 [586]
@@ -175,3 +175,56 @@ A seguire l'output delle due chiamate al servizio.
 }
 ```
 **Console 8** Output del servizio in formato JSON
+
+A seguire un esempio di chiamata al servizio SOAP e in particolare del metodo _getUsersByTag()_ tramite SOAP UI.
+
+![Esempio di chiamata al servizio SOAP per il metodo getUsersByTag](http://www.dontesta.it/blog/wp-content/uploads/2014/02/TEST_SERVIZIO_SOAP_CustomUserServiceWS_1.png)
+
+**Figura 6** - Esempio di chiamata al servizio SOAP per il metodo getUsersByTag
+
+```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.impl.service.user.jaxrsws.symposium.liferay.dontesta.it/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:getUsersByTag>
+         <!--Optional:-->
+         <arg0>it-architect</arg0>
+      </ws:getUsersByTag>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+**Code 1** - SOAP Request per il metodo getUsersByTag
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns2:getUsersByTagResponse xmlns:ns2="http://ws.impl.service.user.jaxrsws.symposium.liferay.dontesta.it/">
+         <return>
+            <persons>
+               <email>antonio.musarra@gmail.com</email>
+               <firstName>Antonio</firstName>
+               <lastName>Musarra</lastName>
+               <userId>30817</userId>
+               <userName>amusarra</userName>
+            </persons>
+         </return>
+      </ns2:getUsersByTagResponse>
+   </soap:Body>
+</soap:Envelope>
+```
+**Code 2** - SOAP Response per il metodo getUsersByTag
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <soap:Fault>
+         <faultcode>soap:Server</faultcode>
+         <faultstring>To be implements</faultstring>
+         <detail>
+            <ns1:CustomUserServiceException xmlns:ns1="http://ws.impl.service.user.jaxrsws.symposium.liferay.dontesta.it/"/>
+         </detail>
+      </soap:Fault>
+   </soap:Body>
+</soap:Envelope>
+```
+**Code 3** - SOAP Fault Response per il metodo getUsersByTags che deve essere implementato
