@@ -87,24 +87,24 @@ Dal _Control Panel => Configuration => System Settings_ occorre configurare
 
 A seguire le configurazioni da applicare per questo progetto.
 
-![Configurazione Apache CXF EndPoints](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_1.png)
+![Configurazione Apache CXF EndPoints](https://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_1.png)
 
 **Figura 1** - Configurazione Apache CXF EndPoints
 
-![Configurazione Apache CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_2.png)
+![Configurazione Apache CXF EndPoint REST](https://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_2.png)
 
 **Figura 2** - Configurazione End Point CXF per i servizi REST
 
-![Configurazione Apache CXF EndPoint SOAP](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_3.png)
+![Configurazione Apache CXF EndPoint SOAP](https://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_3.png)
 
 **Figura 3** - Configurazione End Point CXF per i servizi SOAP
 
 
-![Configurazione REST Extenders](http://www.dontesta.it/blog/wp-content/uploads/2014/02/RESTExtenders.png)
+![Configurazione REST Extenders](https://www.dontesta.it/blog/wp-content/uploads/2014/02/RESTExtenders.png)
 
 **Figura 4** - Configurazione REST Extender
 
-![Configurazione Apache CXF EndPoint](http://www.dontesta.it/blog/wp-content/uploads/2014/02/SOAPExtenders.png)
+![Configurazione Apache CXF EndPoint](https://www.dontesta.it/blog/wp-content/uploads/2014/02/SOAPExtenders.png)
 
 **Figura 5** - Configurazione SOAP Extender
 
@@ -113,7 +113,7 @@ Nel caso in cui volessimo aggiungere il servizio di autenticazione che utilizza 
 * auth.verifier.BasicAuthHeaderAuthVerifier.basic_auth=true -> Abilitazione dell'HTTP Basic Authentication
 * auth.verifier.BasicAuthHeaderAuthVerifier.urls.includes=/ext.persons/* -> Filtro sulle URL a cui applicare il filtro di sicurezza
 
-![Configurazione Sicurezza HTTP Basic CXF EndPoint REST](http://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_4.png)
+![Configurazione Sicurezza HTTP Basic CXF EndPoint REST](https://www.dontesta.it/blog/wp-content/uploads/2014/02/CXFEndPoint_4.png)
 
 **Figura 6** - Configurazione Sicurezza HTTP Basic CXF EndPoint REST
 
@@ -233,7 +233,7 @@ $ curl -v -H "Accept: application/xml" -u test@liferay.com:test1 \
 
 A seguire un esempio di chiamata al servizio SOAP e in particolare del metodo _getUsersByTag()_ tramite SOAP UI.
 
-![Esempio di chiamata al servizio SOAP per il metodo getUsersByTag](http://www.dontesta.it/blog/wp-content/uploads/2014/02/TEST_SERVIZIO_SOAP_CustomUserServiceWS_1.png)
+![Esempio di chiamata al servizio SOAP per il metodo getUsersByTag](https://www.dontesta.it/blog/wp-content/uploads/2014/02/TEST_SERVIZIO_SOAP_CustomUserServiceWS_1.png)
 
 **Figura 7** - Esempio di chiamata al servizio SOAP per il metodo getUsersByTag
 
